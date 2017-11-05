@@ -1,0 +1,206 @@
+<link rel="stylesheet" href="{{'filter_modal_style.css' |asset_url}}" />
+<!--Modal that is shown on mobile -->
+   <div class="modal left fade" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="filter_modal" style="background-color: rgba(0, 0, 0, 0.5);" ontoggle="alert('s');">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content" id="filter_modal_content">
+                <div class="modal-header" id="filter_modal_header">
+<!-- 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+					<h4 class="modal-title" id="myModalLabel2">FILTER</h4>
+				</div>
+				<div class="modal-body">
+					 {% if settings.heading_sb_filters != blank %}
+                        <!--<div class="sb-title">
+                          <h4 class="title">{{ settings.heading_sb_filters }}</h4>
+                        </div> -->
+                        {% endif %}
+                        <ul class="list-unstyled sb-filter-tag">
+                          {% unless current_tags %}
+                          <li class="active first"><span>All Items</span></li>
+                          {% else %}
+                          <li class="first">
+                            <a href="{{ col_url }}"><span>All Items</span></a>
+                          </li>
+                          {% endunless %}
+
+                          {% for tag in collection.all_tags %}
+                          {% if current_tags contains tag %}
+                          <li class="active{% if forloop.length == forloop.index %} last{% endif %}">
+                            <span>{{ tag }}</span>
+                          </li>
+                          {% else %}
+                          <li {% if forloop.length == forloop.index %}class="last"{% endif %}>
+                            <a href="/collections/{% if collection.handle.size > 0 %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handle }}">
+                              <span>{{ tag }}</span>
+                            </a>
+                          </li>
+                          {% endif %}
+                          {% endfor %}
+                        </ul> 
+				</div>
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div>
+
+<!--Close button for modal top right corner  -->
+<div class="modal_close_btn" hidden><span class="modal_close_btn_text" data-toggle="modal" data-target="#filter_modal">X</span></div>
+
+<div class="cata-toolbar" id="cata-toolbar">
+
+  {% if settings.show_col_gl %}
+  <div class="grid-list" style="padding-bottom:50px;">
+    <label style="margin-top:10px;">{{ 'collections.general.view_as' | t }}</label>
+    <span class="grid active" title="{{ 'collections.general.title_grid' | t }}" style="margin-left:0px;"><i class="fa fa-th-large"></i></span>
+    <a class="list" href="?view=list" title="{{ 'collections.general.title_list' | t }}"><i class="fa fa-navicon"></i></a>
+  </div>
+  {% endif %}
+
+  {% if settings.show_col_sort_by %}
+
+  <div id="div_sort_by" style="padding-bottom:12px;">
+    <label for="sort-by" style="margin-top:10px;">Sort by</label> 
+    <select id="sort-by">
+      <option value="manual">Featured</option>
+      <option value="price-ascending">Price: Low to High</option>
+      <option value="price-descending">Price: High to Low</option>
+      <option value="title-ascending">A-Z</option>
+      <option value="title-descending">Z-A</option>
+      <option value="created-ascending">Oldest to Newest</option>
+      <option value="created-descending">Newest to Oldest</option>
+      <option value="best-selling">Best Selling</option>
+    </select>
+  </div>
+  
+  <!--Filter Button for desktop-->
+  <div style="cursor:pointer;background-color:#e6e6e6;height: 34px;width: 116px;margin-left: 20px;vertical-align:top;" type="button" data-toggle="modal" data-target="#filter_modal" id="filter_modal_open_btn_desktop" >
+     <span   style="vertical-align:middle;margin-top: 12px;margin-bottom: 12px;display: initial;font-size: medium;">
+       <i class="fa fa-filter" style="margin-top: 8px;margin-right: 2px;margin-bottom: auto;"></i>
+       <strong style="margin-right: 23px;"> FILTER</strong></span>
+  </div>
+  
+<script>
+Shopify.queryParams = {};
+if (location.search.length) {
+  for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+    aKeyValue = aCouples[i].split('=');
+    if (aKeyValue.length > 1) {
+      Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+    }
+  }
+}
+jQuery('#sort-by')
+  .val('{{ collection.sort_by | default: collection.default_sort_by | escape }}')
+  .bind('change', function() {
+    Shopify.queryParams.sort_by = jQuery(this).val();
+    location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
+  });
+</script>
+  
+  <!-- Filter for Mobile   -->
+  <div class="visible-xs">
+    <div style="margin-top:5px;margin-bottom:5px;position:absolute;left:0px;top:50px;padding-right:20px;">
+     <span type="button" data-toggle="modal" data-target="#filter_modal" id="filter_modal_open_btn"><i class="fa fa-filter"></i><strong> FILTER</strong></span>
+    </div>
+  </div>
+
+  {% include 'pagination-top' %}
+  
+  <style>
+      @media screen and (min-width:0px) and (max-width:768px)
+      {
+         #pagination-top
+         {
+           display:inline-block;
+         }
+         #filter_modal_open_btn_desktop
+         {
+           display:none;
+         }
+         #filter_modal_header
+         {
+           margin-top:42px;
+         }
+         #descrip_header
+         {
+           margin-top:42px;
+         }
+      }
+      @media screen and (min-width:769px)
+      {
+         #pagination-top
+         {
+           display:none;
+         }
+         #filter_modal_open_btn_desktop
+         {
+           display:inline-block;
+         }
+         #filter_modal_header
+         {
+           margin-top:0px;
+         }
+         #descrip_header
+         {
+           margin-top:0px;
+         }
+      }
+      
+      @media screen and (min-width:0px) and (max-width:345px)
+      {
+         #cata-toolbar
+         {
+           text-align:left;
+         }
+      }
+    
+      @media screen and (min-width:346px)
+      {
+         #cata-toolbar
+         {
+           text-align:right;
+         }
+      }
+  </style>
+  
+  <script>
+
+    $('#filter_modal_open_btn').click(function(){ $('.modal_close_btn').show();});
+    $('#filter_modal_open_btn_desktop').click(function(){ $('.modal_close_btn').show();});
+    $('.modal_close_btn').click(function(){$('.modal_close_btn').hide();});
+    $('#filter_modal_content').click(function(){$('.modal_close_btn').show();});
+    $('#filter_modal').click(function(){ if(amIclicked(event,this)){ $('.modal_close_btn').hide(); } });
+    
+    function amIclicked(e, element)
+    {
+        e = e || event;
+        var target = e.target || e.srcElement;
+        if(target.id==element.id)
+            return true;
+        else
+            return false;
+    }
+  </script>
+
+  {% endif %}
+
+</div>
+<script type="text/javascript">
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+  var val_default = '{{ collection.sort_by | default: collection.default_sort_by }}';
+
+  jQuery('.sort-by li.' + val_default).addClass('active');
+  var s = $('#sort_by_box li.sort-action.active');
+  jQuery('.sort-by .name').html(s.html());
+
+  //jQuery('.sort-by .name').html(' {{ collection.sort_by | default: collection.default_sort_by }} ');
+
+  
+</script>

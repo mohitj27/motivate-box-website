@@ -1,0 +1,393 @@
+
+<a id=pricelizer  class='pricelizer-light btn btn-md   product-form__cart-submit' href='javascript:void(0)'><span id='button-text'> My Button </span>
+</a>
+<div class='pricelizer-modal'  id='pricelizer-light-modal' >
+  <div class='pricelizer-modal-dialog' role='document'>
+    <div class='pricelizer-modal-content'>
+	<span class='pricelizer-modal-close'>&times;</span>
+      <div class='pricelizer-modal-body'>
+<div class='row' id='main-loading-page'>
+      <br>
+      <h2 class='dropHolder' style='font-size:14px;'>Current price is: <img style='height: 20px'  src='https://webapp.pricelizer.com/assets/loading-icon.gif' /></h2><br>
+      <h2 class='dropHolder' style='font-size:14px;'>Tell me when the price is:</h2>
+      <div class='col-md-4' style='display:inline-block; width:28%; vertcal-align:top;'>
+        <div class='box-pre'>
+          <div class='border-box-pre'>
+            <p>-10%</p>
+          </div>
+          <h5><small><img style='height: 20px'  src='https://webapp.pricelizer.com/assets/loading-icon.gif' /></small></h5>
+        </div>
+      </div>
+      <div class='col-md-4' style='display:inline-block; width:28%; vertcal-align:top;'>
+        <div class='box-pre'>
+          <div class='border-box-pre' ng-class="{'selected-box-pre': p2}">
+            <p>-20%</p>
+          </div>
+          <h5><small><img style='height: 20px' src='https://webapp.pricelizer.com/assets/loading-icon.gif' /></small></h5>
+        </div>
+      </div>
+      <div class='col-md-4' style='display:inline-block; width:28%; vertcal-align:top;'>
+        <div class='box-pre'>
+          <div class='border-box-pre' ng-class="{'selected-box-pre': p3}">
+            <p>-30%</p>
+          </div>
+          <h5><small><img style='height: 20px'  src='https://webapp.pricelizer.com/assets/loading-icon.gif' /></small></h5>
+        </div>
+      </div>
+    </div>
+	<iframe id="store-clerk-iframe" style="border: 0px; " width="330px" height="330px"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var current_url = window.location.href;
+
+var http = new XMLHttpRequest();
+var url = 'https://webapp.pricelizer.com/services/get_product_detail';
+var params = 'url='+current_url;
+http.open('POST', url, true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {
+    if(http.readyState == 4 && http.status == 200) {
+        console.log(http.responseText);
+    }
+}
+http.send(params);
+// Get the modal
+var modal = document.getElementById('pricelizer-light-modal');
+
+// Get the button that opens the modal
+var btn = document.getElementById('pricelizer');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName('pricelizer-modal-close')[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+
+
+	var purl = window.location.href;
+  var url = 'https://webapp.pricelizer.com/en/visitproducts?p=' + encodeURIComponent(purl);
+
+modal.style.display = 'block';
+var iframeResult = document.getElementById('store-clerk-iframe').setAttribute('src', url);
+
+     document.getElementsByClassName('pricelizer-modal-body').innerHTML = iframeResult;
+     document.getElementById('main-loading-page').style.display='none';
+     document.getElementsByClassName('pricelizer-modal-close')[0].style.opacity='0';
+
+
+
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = 'none';
+    document.getElementById('store-clerk-iframe').setAttribute('src', '');
+}
+
+// When the user clicks anywhere outside of the modal, close it
+ window.onclick = function(event) {
+     if (event.target == modal) {
+         modal.style.display = 'none';
+       document.getElementById('store-clerk-iframe').setAttribute('src', '');
+     }
+ }
+        window.addEventListener('message', function(event) {
+
+            if(event.origin === 'https://webapp.pricelizer.com')
+            {
+              document.getElementsByClassName('pricelizer-modal-close')[0].style.opacity='1';
+		setTimeout(function(){ document.getElementById('pricelizer-light-modal').style.display='none';
+    document.getElementById('store-clerk-iframe').setAttribute('src', ''); }, 3000);
+            }
+            else
+            {
+            }
+
+        }, false);
+  </script>
+<style>
+.pricelizer-modal-close{
+	opacity:0;
+}
+ .pricelizer-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.pricelizer-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    position: relative;
+    padding:5px 12px 10px 3px;
+    border: 1px solid #888;
+    width: 93%;
+}
+
+/* The Close Button */
+.pricelizer-modal-close {
+    color: #000;
+    float: right;
+    font-size: 18px;
+    line-height: 8px;
+    position: absolute;
+    right: 7px;
+    font-weight: bold;
+}
+
+.pricelizer-modal-close:hover,
+.pricelizer-modal-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn.product-form__cart-submit > img {
+    display: inline-block;
+    float: left;
+    margin: 0 0 0 20px;
+    vertical-align: bottom;
+    width: 33px;
+}
+.btn.product-form__cart-submit > span {
+    display: inline-block;
+    margin: 4px 0;
+    text-transform: capitalize;
+}
+
+#m-button .product-form__cart-submit.btn{
+width:100% !important;
+display:block !important;
+}
+#pricelizer-light-modal .pricelizer-modal-dialog {
+    margin: 30px auto;
+    width: 360px;
+  text-align:center
+}
+#pricelizer-light-modal .pricelizer-modal-content{
+border-radius:2px;}
+@media only screen and (max-width:570px){
+#m-button{
+  width:100%;
+    padding:10px 0;
+    display:block;
+    cursor: pointer;
+  }
+  #pricelizer-light-modal .pricelizer-modal-dialog{
+    width: 300px;
+  }
+  #pricelizer-light-modal .pricelizer-modal-body iframe{
+  width: 261px !important;
+  }
+#pricelizer-light-modal iframe{height:320px}
+  #login-page small {
+    font-size: 76%;
+  }
+}
+#pricelizer-light-modal .pricelizer-modal-dialog{
+   margin: 60px auto;
+}
+#pricelizer-light-modal{
+background: rgba(0 , 0 , 0 , 0.6) !important;
+z-index:99999 !important;
+}
+.modal.fade.in{
+  	top:0% !important;
+  }
+.desc_blk_bot .modal.in .modal-dialog {
+    transform: translate(0px, 30%);
+}
+.btn-lg img{
+vertical-align:middle;}
+ #aquarius-2d-bag #pricelizer-light-modal .pricelizer-modal-dialog{
+ margin: 570px auto;}
+#pricelizer-light-modal iframe{
+  height:320px !important;
+}
+ .modal-backdrop, .modal-backdrop.fade.in{
+background: #000;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  z-index: 0;
+  background-color: #000;
+}
+#pricelizer-light-modal{
+  z-index:9999 !important
+}
+# .modal {
+#   position: fixed;
+#   top: 0;
+#   right: 0;
+#   bottom: 0;
+#   left: 0;
+#   z-index: 1050;
+#   display: none;
+#   overflow: hidden;
+#   -webkit-overflow-scrolling: touch;
+#   outline: 0;
+# }
+# .modal-dialog {
+#   position: relative;
+#   width: auto;
+#   margin: 10px;
+# }
+# .modal-content {
+#   -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+#   box-shadow: 0 5px 15px rgba(0,0,0,.5);
+# }
+# .modal-content {
+#   position: relative;
+#   background-color: #fff;
+#   -webkit-background-clip: padding-box;
+#   background-clip: padding-box;
+#   border: 1px solid #999;
+#   border: 1px solid rgba(0,0,0,.2);
+#   border-radius: 6px;
+#   outline: 0;
+#   -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+#   box-shadow: 0 3px 9px rgba(0,0,0,.5);
+# }
+# .modal-body {
+#   position: relative;
+#   padding: 15px;
+# }
+# .modal.fade.in{
+# top: 5% !important;
+# opacity: 1;
+# }
+ #pricelizer{
+  width:230px;
+  padding:0 0;
+  display:block;
+  border-radius: 0;
+  border-width: 0;
+  border-color: 0;
+  background-color: green;
+}
+#button-text{
+color: #ffff;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+text-transform: capitalize ;
+}
+.btn.product-form__cart-submit > img {
+  display: inline-block;
+  float: left;
+  margin: 0 0 0 0;
+  vertical-align: bottom;
+  width: 33px;
+}
+.btn.product-form__cart-submit > span {
+  display: inline-block;
+  margin: 4px 0;
+  text-transform: capitalize;
+}
+
+#pricelizer .product-form__cart-submit.btn{
+width:100% !important;
+display:block !important;
+}
+#pricelizer-light-modal .modal-dialog {
+  margin: 30px auto;
+  width: 360px;
+text-align:center
+}
+#pricelizer-light-modal .modal-content{
+border-radius:2px;}
+@media only screen and (max-width:570px){
+#pricelizer{
+width:100%;
+  padding:10px 0;
+  display:block;
+}
+#pricelizer-light-modal .modal-dialog{
+  width: 300px;
+}
+#pricelizer-light-modal .modal-body iframe{
+width: 261px !important;
+}
+}
+#pricelizer.product-form__cart-submit.btn-md{
+  font-size: 12px;
+  margin: 0 ;
+  padding: 9px 10px;
+  white-space: normal;
+}
+#pricelizer-light-modal .modal-dialog{
+ margin: 130px auto;
+}
+#pricelizer-light-modal{
+background: rgba(0 , 0 , 0 , 0.6) !important
+}
+.modal.fade.in{
+  top:0% !important;
+}
+.desc_blk_bot .modal.in .modal-dialog {
+  transform: translate(0px, 30%);
+}
+#aquarius-2d-bag #pricelizer-light-modal .modal-dialog{
+margin: 570px auto;
+}
+.translation_missing{display: none} .box-pre h5,body,h1,h2{font-weight:300}.btn.btn-primary,body{font-family:'Open Sans',sans-serif}.fbSignIn,.googleSignIn{display:inline-block;text-indent:-999999px}h2{font-size:25px}hr{margin-top:30px}.box-pre .border-box-pre{border:2px solid #ccc;border-radius:50%}.box-pre h5 small,h2 small{font-size:14px;font-weight:300;vertical-align:top}.selected-box-pre{background:#d9d9d9}.social-icons-holder img{width:100%;cursor:pointer}.form-control{box-shadow:none;height:40px;margin:5px 0;border-radius:0;border-width:2px}h1{font-size:25px;margin-bottom:5px}.btn.btn-primary.btn-small{padding:4px 20px;font-size:14px}@media only screen and (min-width:520px) and (max-width:1024px){.col-md-2,.col-md-4{display:inline-block}.col-md-4{width:28%}.col-md-2{width:20%}.box-pre .border-box-pre{font-size:38px;line-height:123px;margin-bottom:12px;width:120px;height:120px}.box-pre .border-box-pre p{line-height:118px;font-size:34px}}@media only screen and (max-width:520px){.col-md-2{width:25%;display:inline-block}}.main.ng-scope{overflow-x:hidden!important}.fbSignIn,.googleSignIn,.main{overflow:hidden}.social-icons-holder{margin:8px 0}.main h2{font-size:16px;margin:0}.main h2.dropHolder{margin:5px 0;font-size:18px}.main h2.dropHolder.lg-font{font-size:35px}.btn.btn-primary{background:#ff8a00;color:#fff;border-radius:0;border:none;font-size:12px;font-weight:700;margin:4px 0;padding:10px 73px}.box-pre .border-box-pre{height:70px;margin:19px auto 15px;text-align:center;vertical-align:middle;width:70px}.box-pre .border-box-pre p{font-size:22px;line-height:63px;cursor:pointer;margin:0;vertical-align:middle}.main .col-md-4{width:28%;vertical-align:top;display:inline-block}.box-pre h5{font-size:12px;color:#999;word-wrap: break-word; }.box-pre{margin:45px 0}.box-pre h5 span{font-size:12px;vertical-align:bottom;font-weight:300}.message-holder p{font-size:23px}.fbSignIn{background:url(/assets/fb_button.png) no-repeat;width:55px;height:55px;background-size:100%}.googleSignIn{background:url(/assets/google_button.png) no-repeat;width:55px;height:55px;background-size:100%}
+.fb-new{color: #fff;
+border-radius: 50%;
+overflow: hidden;
+background: #3b5998;
+width: 45px;
+height: 45px;
+font-size: 24px !important;
+line-height: 45px !important;
+vertical-align: middle;
+}
+.google-new{color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #dd5044;
+    width: 45px;
+    height: 45px;
+    font-size: 24px !important;
+    line-height: 43px !important;
+    vertical-align: middle;
+}
+.fb-new:hover,
+.google-new:hover{
+    color: #fff !important;
+    text-decoration: none;
+}
+#error_email{
+    color: red;
+    font-size: 10px;
+    line-height: 9px;
+    list-height: 6;
+    margin-bottom: 0;
+}
+@media only screen and (max-width:768px){
+    .box-pre h5{
+        font-size:12px;
+    }
+    .box-pre h5 small, h2 small{
+        font-size: 8px;
+    }
+}
+</style>
+      

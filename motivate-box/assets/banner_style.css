@@ -1,0 +1,36 @@
+.banner_title_inner
+{
+    background: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 8px;
+    padding-left: 8px;
+    font-weight:bolder;
+    font-size:20px;
+}
+.banner_title
+{
+   position: absolute; 
+   bottom:25px; 
+   width:100%;
+   text-align:center;
+}
+.bt-item:hover .banner_title_inner
+{
+  background-color:#f5f5f0;
+  border:3px solid #ccccb3;
+}
+#overlay span {
+    background:#f7b02e;
+    bottom: 0;
+    display: block;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.bt-item:hover #overlay>span { opacity: 0.8; }
+#overlay:hover .banner_title{opacity:1.0;}

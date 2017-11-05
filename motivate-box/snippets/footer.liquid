@@ -1,0 +1,641 @@
+<style>
+  .footer-content a{color:#777;  }
+  .footer-content ul
+  {
+    line-height: 1.7em;
+    font-size: 14px;
+  }
+  .company_head
+  {
+    margin-bottom:1px;
+    color:white;
+  }
+  .model_list
+  {
+    list-style-type: none;
+    margin-bottom: 18px;
+  }
+  .payment_opt_img
+  {
+    height: 30px;
+    width: 50px;
+    margin-right: 5px;
+  }
+  .contact_icon
+  {
+    height:20px;
+    width:20px;
+  }
+  .footer_nav_bar
+  {
+    background-color:#f7b02e;
+    cursor: pointer;
+    border-left:1px solid;
+    border-right:1px solid;
+    border-bottom:1px solid;
+  }
+  @media screen and (min-width:0px){
+    .footer_main{display:block;}
+    .footer_main>div{ border-bottom:1px solid white;}
+    .footer_nav_bar{ border-top:0px solid;}
+  }
+  @media screen and (min-width:768px){
+    .footer_main{display:flex;}
+    .footer_main>div{ border-bottom:0px solid white;}
+    .footer_nav_bar{ border-top:1px solid;}
+  }
+</style>
+<footer style="background-color:black;padding-top:60px;" id="footer-content"{% if settings.footer_placement == 'boxes' or settings.general_placement == 'boxes' %} class="boxes"{% endif %}>
+
+  <!-- Begin Footer Content -->
+
+  <div class="footer-content">
+    <div class="container" style="padding-top:0px;padding-bottom:0px;border:1px solid white;">
+
+      {% if settings.footer_about_shop_block != 'none' %}
+      <div class="footer-about-shop" style="margin-bottom:0px;">
+        {% if settings.footer_about_shop_block == 'default' %}
+
+        <div class="footer-logo">
+          <img src="{{ 'footer_logo.png' | asset_url }}" alt="footer_logo" />
+        </div>
+
+        {% if settings.footer_about_shop_caption != blank %}
+<!--         <p class="caption">{{ settings.footer_about_shop_caption }}</p> -->
+        {% endif %}
+        {% else %}
+
+        {% capture my_shop %}{{settings.footer_about_shop_block_snippet}}{% endcapture %}
+        {% include my_shop %}
+
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <div class="row footer_main" style="border-top:1px solid white;">
+
+        {% comment %} Categories {% endcomment %}
+        {% if settings.footer_categories_block != 'none' %}
+        <div class="col-md-2" style="border-right:1px solid white;">
+          <div class="widget-footer" style="text-align: center;margin-top: 15px;">
+            {% if settings.footer_categories_block == 'default' %}
+            {% if settings.footer_categories_heading != blank %}
+            <h5 class="title hidden-xs">{{ settings.footer_categories_heading }}</h5>
+            <a href="javascript:;" class="visible-xs" data-toggle="dropdown">
+              <h4 class="title">{{ settings.footer_categories_heading }}</h4>
+            </a>
+            {% endif %}
+            <ul class="list-unstyled">
+              {% for collection in collections limit:4 %}
+              {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+              <li>
+                <a href="{{ collection.url }}" title="{{ collection.title | escape }}">{{ collection.title }}</a>
+              </li>
+              {% endunless %}
+              {% endfor %}
+            </ul>
+            {% else %}
+            {% capture my_cate %}{{settings.footer_categories_block_snippet}}{% endcapture %}
+            {% include my_cate %}
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% comment %} About Store {% endcomment %}
+        {% if settings.footer_about_store_block != 'none' %}
+          <div class="col-sm-3" style="border-right:1px solid white;font-size:14px">
+            <div class="row"><h4 style="color:white;text-align:center;margin-top:15px;margin-bottom:5px;">GET IN TOUCH...</h4></div>
+            <div class="row" style="color:#777;">
+              <div class="col-md-12" style="padding-bottom:10px;">
+                <span><img src="{{'phone_icon.ico'|asset_url}}"alt="text_to_describe_phone_image" class="contact_icon"/>+9133 4600 0099</span>
+              </div>
+              <div class="col-md-12" style="padding-bottom:10px;">
+                <span><img src="{{'whatsapp_icon.svg'|asset_url}}" alt="text_to_describe_watsapp_image" class="contact_icon"/>+91 88202 64921</span>
+              </div>
+              <div class="col-md-12" style="padding-bottom:10px;">
+                <span><img src="{{'email_icon.png'|asset_url}}" alt="text_to_describe_email_image" class="contact_icon"/> hi@motivatebox.com</span>
+              </div>
+            </div> 
+            <div class="row">
+              <div class="col-md-12">
+                {% if settings.show_social_icons %}
+                {% include 'social-media-icons' %}
+                {% endif %}
+            </div>
+              </div>
+          </div>
+        {% endif %}
+
+        {% comment %} Customer Service {% endcomment %}
+        {% if settings.footer_cs_block != 'none' %}
+        <div class="col-sm-3" style="border-right:1px solid white;">
+          <div class="row"><h4 style="color:white;text-align:center;margin-top:15px;margin-bottom:5px;">COMPANY</h4></div>
+          <div class="row"  style="padding-bottom:25px">
+            <div class="col-md-5">
+              <ul style="list-style-type: none;">
+                <li><a href="/blogs/news">Blogs</a></li>                
+                <li><a href="/pages/page-contact">Contact Us</a></li>
+                <li><a href="/pages/careers">Career</a></li>
+              </ul>
+            </div>            
+            <div class="col-md-7">
+              <ul style="list-style-type: none;">
+                <li><a href="https://motivatebox.com/pages/privacy-statement">Privacy Statement</a></li>                
+                <li><a href="/pages/terms-of-service">Terms Of Services</a></li>
+                <li><a href="/pages/about-us">About Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row"><h4 style="color:white;text-align:center;margin-top:5px;margin-bottom:5px;">POPULAR</h4></div>
+          <div class="row" style="padding-bottom: 10px;">
+            <div class="col-md-12">
+              <ul style="list-style-type: none;">
+                <li><a href="/collections/100-best-selling-phone-cases">Top 100 Mobile cases designs</a></li>
+                
+                <li><a href="/collections/top-20-startup-and-motivational-designs" class="top motivational mobile cases">Top Motivational Mobile cases design</a></li>
+                <li><a href="/collections/top-20-girly-design" class="top girly mobile cases">Top 20 Girly Mobile cases design</a></li>
+                <li><a href="/collections/top-20-superhero-design" class="top supereheroes mobile cases">Top 20 Superheroes Mobile cases design</a></li>
+                <li><a href="/collections/top-20-coasters" class="top 20 coasters">Top 20 Coasters</a></li>
+                <li><a href="/collections/top-20-mousepads" class="top 20 mousepads">Top 20 Mousepads</a></li>
+                <li><a href="/collections/top-20-cushion-covers" class="top 20 cushion covers">Top 20 Cushion Covers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% comment %} Information {% endcomment %}
+<!--         {% if settings.footer_info_block != 'none' %}
+        <div id="infomation" class="col-sm-3" style="border:1px solid white;">
+        </div>
+        {% endif %} -->
+
+        <div class="col-sm-4">
+          <div class="row" style="margin-left:5px;">
+                {% comment %} Newsletter {% endcomment %}
+        <!--         {% if settings.show_mailing_list or settings.show_social_icons %} -->
+
+                  {% if settings.show_mailing_list %}
+                  <div id="widget-newsletter" style="margin-top:15px;">
+                    <form action="{{ settings.mailing_form_action }}" method="post" id="mc-embedded-subscribe-form" class="mailing-form" name="mc-embedded-subscribe-form" >
+                      <h4 class="title" style="margin-bottom: 10px;">{{settings.mailing_list_heading}}</h4>
+                      <input style="color:#e18a07;margin-right:7px;" class="form-mailing" type="email" required placeholder="{{ settings.mailing_list_email_text }}" name="EMAIL" id="email-input" />
+                      {% if settings.mailing_list_button != blank %}
+                      <button id="email-submit" type="submit" title="{{settings.mailing_list_button}}" class="btn-1" style="background: #f7b02e;margin-top: 1px;">{{settings.mailing_list_button}}</button>
+                      {% endif %}
+                    </form>
+                  </div>
+                  {% endif %}
+                {% endif %}
+          </div>
+          <div class="row" style="margin-top:15px">
+            <div class="col-md-12" style="margin-bottom:10px;font-size:15px;"><p>We accept.....</p></div>
+            <div class="col-md-12">
+              <div style="float:left"><img src="{{'visa.jpg'|asset_url}}" alt="text_to_describe_visa_icon" class="payment_opt_img"></div>
+              <div style="float:left"><img src="{{'mastercard.jpg'|asset_url}}" alt="text_to_describe_mastercard_icon" class="payment_opt_img"></div>
+              <div style="float:left"><img src="{{'american_express.jpg'|asset_url}}" alt="text_to_describe_american_express_icon"class="payment_opt_img"></div>
+              <div style="float:left"><img src="{{'paypal.jpg'|asset_url}}" alt="text_to_describe_paypal_icon" class="payment_opt_img"></div>
+            </div>
+          </div>
+          <div class="row" style="margin-top:45px;padding-bottom: 30px;">
+            <div class="col-md-12" style="margin-bottom:10px;font-size:15px;"><p>Shipping Patners</p></div>
+            <div class="col-md-12">
+              <div style="float:left"><img src="{{'delhivery.jpg'|asset_url}}" alt="text_to_describe_delhivery_icon" class="payment_opt_img"></div>
+              <div style="float:left"><img src="{{'skyking_logo.jpg'|asset_url}}" alt="text_to_describe_skyking_icon" class="payment_opt_img"></div>
+              <div style="float:left"><img src="{{'dtdc_logo.jpg'|asset_url}}" alt="text_to_describe_dtdc_icon" class="payment_opt_img"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row footer_nav_bar"  id="show_links">
+        <div class="col-md-12">
+            <h4 style="margin-top:11px;float:left;">NAVIGATION LINKS</h4>
+            <img src="{{'arrow_down.png'|asset_url}}" alt="arrow_image" style="height:12px;margin-top:15px;margin-bottom: 2px;float:right;" id="toggle_icon"/>
+        </div>
+      </div>
+      <div class="row" id="footer_nav_div" style="border:1px solid white;color:white;">
+        <div style="margin-top:30px;">
+              <div class="col-md-2">
+                <h5 class="company_head">APPLE</h5>
+                <ul class="model_list">
+								
+					 <li><a href="/collections/iphone-X-with-hole">Iphone X with hole</a></li>    
+ <li><a href="/collections/iphone-X">Iphone X</a></li>    
+ <li><a href="/collections/Iphone-8-plus-with-apple-cut">Iphone 8 plus with apple cut</a></li>    
+ <li><a href="/collections/Iphone-8-with-round-cut">Iphone 8 with round cut</a></li>    
+ <li><a href="/collections/Iphone-8-with-apple-cut">Iphone 8 with apple cut</a></li>    
+ <li><a href="/collections/Iphone-8-plus">Iphone 8 plus</a></li>    
+ <li><a href="/collections/Iphone-8">Iphone 8</a></li>    
+ <li><a href="/collections/iphone-7-plus-with-apple-cut">Iphone 7 plus with logo cut</a></li>    
+ <li><a href="/collections/iphone-7-plus-with-apple-cut">Iphone 7 plus with logo cut</a></li>    
+ <li><a href="/collections/iphone-7-plus">Iphone 7 plus</a></li>    
+ <li><a href="/collections/iphone-7-with-apple-cut">Iphone 7 with logo cut</a></li>    
+ <li><a href="/collections/iphone-7">Iphone 7</a></li>    
+ <li><a href="/collections/iphone-6-6-s">iphone 6 plus/6s plus</a></li>    
+ <li><a href="/collections/iphone-6-with-apple-cut-1">iphone 6 with apple cut</a></li>    
+ <li><a href="/collections/iphone-5-5s">Iphone 5/5s</a></li>    
+ <li><a href="/collections/iphone-6-6s">Iphone 6 &amp; 6s</a></li>    
+ <li><a href="/collections/iphone-4-4s">Iphone 4/4s</a></li>    
+ <li><a href="/collections/ipod-touch-6">Ipod touch 6</a></li>    
+ <li><a href="/collections/ipod-touch-5">Ipod touch 5</a></li>    
+
+				
+                </ul>
+                
+                <h5 class="company_head">ASUS</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/zenfone-2-ze551ml">Asus Zenfone 2 (ZE551ML)</a></li>
+                  <li><a href="/collections/zenfone-5">Asus Zenfone 5</a></li>
+                  <li><a href="/collections/asus-zenfone-2-laser-ze500ml">Asus Zenfone 2 Laser ZE500ML</a></li>
+                  <li><a href="/collections/asus-zenfone-max">Asus Zenfone Max</a></li>
+                  <li><a href="/collections/asus-zenfone-2-laser-ze550kl">Asus Zenfone 2 Laser ZE550KL</a></li>
+                  <li><a href="/collections/asus-zenfone-selfie">Asus Zenfone Selfie</a></li>
+                </ul>
+                <h5 class="company_head">COOLPAD</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/coolpad-note-3">Coolpad Note 3</a></li>
+                  <li><a href="/collections/coolpad-note-3-lite">Coolpad Note 3 Lite</a></li>
+                  <li><a href="/collections/coolpad-note-5">Coolpad Note 5</a></li>
+                </ul>
+                <h5 class="company_head">GIONEE</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/gionee-s6s">Gionee S6s</a></li>
+   <li><a href="/collections/gionee-a1">Gionee A1</a></li>
+                              
+			   </ul>
+                <h5 class="company_head">GOOGLE</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/google-pixel">Google Pixel</a></li>
+                  <li><a href="/collections/google-pixel-xl">Google Pixel XL</a></li>
+                  <li><a href="/collections/huawei-nexus-6p">Google Nexus 6p</a></li>
+                </ul>
+              </div>
+              <div class="col-md-2">
+                <h5 class="company_head">HTC</h5>
+                <ul class="model_list">
+                  
+				<li><a href="/collections/htc-10-pro">HTC 10 Pro</a></li>
+				  <li><a href="/collections/htc-one-m9">HTC One M9</a></li>
+                  <li><a href="/collections/one-a9">HTC One A9</a></li>
+                  <li><a href="/collections/one-m7">HTC One M7</a></li>
+                  <li><a href="/collections/htc-828">HTC Desire 828</a></li>
+                  <li><a href="/collections/desire-826-dual-sim">HTC Desire 826 (Dual sim)</a></li>
+                  <li><a href="/collections/desire-820">HTC Desire 820</a></li>
+                  <li><a href="/collections/desire-816">HTC Desire 816</a></li>
+                  <li><a href="/collections/htc-728dual-sim">HTC 728(Dual sim)</a></li>
+                  <li><a href="/collections/desire-626">HTC Desire 626</a></li>
+                </ul>
+                <h5 class="company_head">HONOR</h5>
+                <ul class="model_list">
+
+
+			  <li><a href="/collections/honor-8">Honor 8</a></li>
+ <li><a href="/collections/huawei-honor-6x">Huawei Honor 6x</a></li>  
+<li><a href="/collections/huawei-honor-5x">Huawei Honor 5x</a></li>  
+<li><a href="/collections/huawei-honor-5c">Huawei Honor 5c</a></li>  
+             
+			 <li><a href="/collections/honor-6-plus">Honor 6 Plus</a></li>
+                  <li><a href="/collections/honor-holly">Honor Holly</a></li>
+                  <li><a href="/collections/honor-4x">Honor 4X</a></li>
+                  <li><a href="/collections/huawei-honor-4c">Huawei Honor 4C</a></li>
+                  <li><a href="/collections/huawei-nexus-6p">Huawei Nexus 6p</a></li>
+                </ul>
+                <h5 class="company_head">LEECO</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/le-max-2">LeEco le max 2</a></li>
+                  <li><a href="/collections/leeco-le-max">LeEco le max</a>
+                  <li><a href="/collections/leeco-pro-3">LeEco Pro 3</a></li>
+                  <li><a href="/collections/leeco-1s">LeEco 1s</a></li>
+                  <li><a href="/collections/le-eco-le-2">Le Eco Le 2</a></li>
+                </ul>
+                <h5 class="company_head">LENOVO</h5>
+                <ul class="model_list">
+              
+ 
+<li><a href="/collections/lenovo-K8-Note">Lenovo K8 Note</a></li>    
+<li><a href="/collections/k6-note">Lenovo K6 Note</a></li>    
+<li><a href="/collections/vibe-k6">Lenovo Vibe K6</a></li>    
+<li><a href="/collections/k5-note">Lenovo K5 Note</a></li>    
+<li><a href="/collections/k5">Lenovo K5/K5 Plus</a></li>    
+<li><a href="/collections/lenovo-lemon-3">Lenovo Lemon 3</a></li>    
+<li><a href="/collections/lenovo-zuk-z2">Lenovo Zuk Z2</a></li>    
+<li><a href="/collections/lenovo-zuk-z1">Lenovo Zuk Z1</a></li>    
+<li><a href="/collections/lenovo-k4-note">Lenovo K4 Note</a></li>    
+<li><a href="/collections/k3-note">Lenovo K3 Note/ A7000</a></li>    
+<li><a href="/collections/lenovo-a7700">Lenovo A7700</a></li>    
+<li><a href="/collections/lenovo-a7010">Lenovo A7010</a></li>    
+<li><a href="/collections/lenovo-a6600">Lenovo A6600</a></li>    
+<li><a href="/collections/vibe-p1">Lenovo Vibe P1</a></li>    
+<li><a href="/collections/vibe-p1m">Lenovo Vibe P1M</a></li>    
+<li><a href="/collections/lenovo-a2010">Lenovo A2010</a></li>    
+
+                </ul>
+              </div>
+              <div class="col-md-2">
+                <h5 class="company_head">LG</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/lg-q6">LG Q6</a></li>
+                  
+				  <li><a href="/collections/nexus-5">LG Nexus 5</a></li>
+                  <li><a href="/collections/lg-nexus-5x">LG Nexus 5X</a></li>
+                  <li><a href="/collections/lg-g4">LG G4</a></li>
+                  <li><a href="/collections/lg-k7">LG K7</a></li>
+                  <li><a href="/collections/lg-k10">LG K10</a></li>
+                  <li><a href="/collections/lg-g4-stylus">LG G4 Stylus</a></li>
+                </ul>
+                <h5 class="company_head">MEIZU</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/meizu-m3-note">Meizu M3 Note</a></li>
+                </ul>
+                <h5 class="company_head">MICROMAX</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/canvas-fire-4-a107">Micromax Canvas Fire 4 A107</a></li>
+                  <li><a href="/collections/canvas-selfie-2-q340">Micromax Canvas Selfie 2 Q340</a></li>
+                  <li><a href="/collections/yuphoria">Micromax Yuphoria</a></li>
+                  <li><a href="/collections/yureka">Micromax YU Yureka</a></li>
+                  <li><a href="/collections/micromax-canvas-5">Micromax Canvas 5</a></li>
+                  <li><a href="/collections/micromax-canvas-6-pro-e484">Micromax Canvas 6 pro E484</a></li>
+                  <li><a href="/collections/canvas-express-2">Micromax Canvas Express 2</a></li>
+                </ul>
+                <h5 class="company_head">MOTOROLA</h5>
+                <ul class="model_list">
+                   <li><a href="/collections/moto-g5-plus">Moto G5 Plus</a></li>    
+<li><a href="/collections/moto-g5s">Moto G5s</a></li>    
+<li><a href="/collections/moto-g5s-plus">Moto G5s Plus</a></li>    
+<li><a href="/collections/moto-g4">Moto G5</a></li>    
+<li><a href="/collections/moto-c">Moto C</a></li>    
+<li><a href="/collections/moto-c-plus">Moto C Plus</a></li>    
+<li><a href="/collections/moto-z2-play">Moto Z2 Play</a></li>    
+<li><a href="/collections/moto-g4">Moto G4/G4 Plus</a></li>    
+<li><a href="/collections/moto-g4-play">Moto G4 Play</a></li>    
+<li><a href="/collections/moto-g3">Moto G3</a></li>    
+<li><a href="/collections/moto-x-play">Moto X Play</a></li>    
+<li><a href="/collections/moto-x-style">Moto X Style</a></li>    
+<li><a href="/collections/moto-e3">Moto E3</a></li>    
+<li><a href="/collections/moto-x">Moto X</a></li>    
+<li><a href="/collections/moto-g2">Moto G2</a></li>    
+<li><a href="/collections/moto-g1">Moto G1</a></li>    
+<li><a href="/collections/moto-e2">Moto E2</a></li>    
+<li><a href="/collections/moto-e1">Moto E1</a></li>    
+                </ul>
+				
+                <h5 class="company_head">XIAOMI</h5>
+				 <ul class="model_list">
+				
+				<li><a href="/collections/xiaomi-mi4a">Xiaomi Mi 4a</a></li>    
+<li><a href="/collections/xiaomi-mi5c">Xiaomi Mi 5c</a></li>    
+<li><a href="/collections/xiaomi-mi-6">Xiaomi Mi 6</a></li>  
+
+
+</ul>
+              </div>
+              <div class="col-md-2">
+                <ul class="model_list">
+  
+<li><a href="/collections/xiaomi-mi-4x">Xiaomi Mi 4x</a></li>    
+<li><a href="/collections/xiaomi-mi-5x">Xiaomi Mi 5x</a></li>    
+<li><a href="/collections/redmi-4">Xiaomi Redmi 4</a></li>    
+<li><a href="/collections/xiaomi-a1">Xiaomi Mi A1</a></li>    
+<li><a href="/collections/mi-max-2">Xiaomi Mi Max 2</a></li>    
+<li><a href="/collections/xiaomi-redmi-note-4">Xiaomi Redmi Note 4</a></li>    
+<li><a href="/collections/redmi-note-3">Redmi Note 3</a></li>    
+<li><a href="/collections/mi-max">Xiaomi Mi Max</a></li>    
+<li><a href="/collections/3s-prime">Redmi 3s prime</a></li>    
+<li><a href="/collections/xiaomi-redmi-3s">Xiaomi Redmi 3s</a></li>    
+<li><a href="/collections/xiaomi-mi5">Xiaomi Mi5</a></li>    
+<li><a href="/collections/mi4i">Xiaomi Mi4i</a></li>    
+<li><a href="/collections/redmi-note">Redmi Note</a></li>    
+<li><a href="/collections/xiaomi-redmi-2s">Xiaomi Redmi 2s</a></li>    
+</ul>
+
+
+				<h5 class="company_head">NOKIA</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/nokia-3">Nokia 3</a></li>
+                  
+				  <li><a href="/collections/lumia-536">Lumia 535</a></li>
+                  <li><a href="/collections/nokia-lumia-731">Lumia 730</a></li>
+                  <li><a href="/collections/nokia-lumia-641">Lumia 640</a></li>
+                  <li><a href="/collections/nokia-lumia-541">Lumia 540</a></li>
+                  <li><a href="/collections/lumia-531">Lumia 530</a></li>
+                </ul>
+                <h5 class="company_head">ONEPLUS</h5>
+                <ul class="model_list">
+                   <li><a href="/collections/oneplus-5">Oneplus 5</a></li>
+                 
+				  <li><a href="/collections/oneplus-3">Oneplus 3 or 3T</a></li>
+                  <li><a href="/collections/oneplus-2">Oneplus Two</a></li>
+                  <li><a href="/collections/oneplus-x">Oneplus X</a></li>
+                  <li><a href="/collections/oneplus-1">Oneplus 1</a></li>
+                </ul>
+                <h5 class="company_head">OPPO</h5>
+                <ul class="model_list">
+                 	
+<li><a href="/collections/oppo-r11-plus">Oppo R11 Plus</a></li>    
+<li><a href="/collections/oppo-a57">Oppo A57</a></li>    
+<li><a href="/collections/oppo-f3-plus">Oppo F3 Plus</a></li>    
+<li><a href="/collections/oppo-r9-plus">Oppo R9 Plus</a></li>    
+<li><a href="/collections/oppo-r9s">Oppo R9S</a></li>    
+<li><a href="/collections/oppo-r9">Oppo R9</a></li>    
+<li><a href="/collections/oppo-A59">Oppo A59</a></li>    
+<li><a href="/collections/oppo-a37">Oppo A37</a></li>    
+<li><a href="/collections/oppo-a35">Oppo A35</a></li>    
+<li><a href="/collections/best-printed-phone-cover-for-oppo-f3">Oppo F3</a></li>    
+<li><a href="/collections/oppo-f1s">Oppo F1S</a></li>    
+<li><a href="/collections/oppo-f1-plus">Oppo F1 Plus</a></li>    
+<li><a href="/collections/oppo-f1">Oppo F1</a></li>    
+
+				 
+				 
+                </ul>
+                <h5 class="company_head">SAMSUNG</h5>
+                <ul class="model_list">
+				
+				 
+<li><a href="/collections/galaxy-note-8">Samsung Galaxy Note 8</a></li>    
+ <li><a href="/collections/samsung-s8-plus">Samsung S8 Plus</a></li>    
+<li><a href="/collections/samsung-s8">Samsung S8</a></li>    
+<li><a href="/collections/samsung-s7-edge">Samsung S7 Edge</a></li>    
+
+</ul>
+              </div>
+              <div class="col-md-2">
+                <ul class="model_list">
+
+				
+		
+<li><a href="/collections/samsung-s7">Samsung S7</a></li>    
+<li><a href="/collections/samsung-s6-edge-plus">Samsung S6 Edge Plus</a></li>    
+<li><a href="/collections/samsung-s6-edge-g9250">Samsung S6 Edge G9250</a></li>    
+<li><a href="/collections/samsung-s6">Samsung S6</a></li>    
+<li><a href="/collections/samsung-s4">Samsung S4</a></li>    
+<li><a href="/collections/samsung-c9-pro">Samsung C9 Pro</a></li>    
+<li><a href="/collections/samsung-c7-pro">Samsung C7 Pro</a></li>    
+<li><a href="/collections/samsung-c5-pro">Samsung C5 Pro</a></li>    
+<li><a href="/collections/samsung-j7-pro">Samsung J7 Pro</a></li>    
+<li><a href="/collections/samsung-j7-max">Samsung J7 Max</a></li>    
+<li><a href="/collections/samsung-j7-prime">Samsung J7 Prime</a></li>    
+<li><a href="/collections/samsung-j7-2017">Samsung J7 2017 version</a></li>    
+<li><a href="/collections/samsung-j7-2016-version">Samsung J7 2016 version</a></li>    
+                
+<li><a href="/collections/galaxy-j7">Samsung Galaxy J7 2015</a></li>    
+<li><a href="/collections/samsung-j5-prime">Samsung J5 Prime</a></li>    
+<li><a href="/collections/samsung-j5-2016-version">Samsung J5 2016 version</a></li>    
+<li><a href="/collections/galaxy-j5">Samsung Galaxy J5 2015</a></li>    
+<li><a href="/collections/j3-2017-edition">Samsung J3 2017 edition</a></li>    
+<li><a href="/collections/j3-2016-edition">Samsung J3 2016 edition</a></li>    
+<li><a href="/collections/galaxy-j2-2016">Samsung Galaxy J2 2016</a></li>    
+<li><a href="/collections/galaxy-j2-prime">Samsung Galaxy J2 Prime</a></li>    
+<li><a href="/collections/galaxy-j2">Samsung Galaxy J2</a></li>    
+<li><a href="/collections/samsung-j1-2016-version">Samsung J1 2016 version</a></li>    
+<li><a href="/collections/galaxy-j1-ace">Samsung Galaxy J1 Ace</a></li>    
+<li><a href="/collections/galaxy-j1">Samsung Galaxy J1</a></li>    
+<li><a href="/collections/galaxy-a8">Samsung Galaxy A8</a></li>    
+<li><a href="/collections/samsung-a7-2017">Samsung A7 2017</a></li>    
+<li><a href="/collections/a7-2016">Samsung A7 2016</a></li>    
+<li><a href="/collections/galaxy-a7">Samsung Galaxy A7</a></li>    
+<li><a href="/collections/samsung-a5-2017">Samsung A5 2017</a></li>    
+<li><a href="/collections/a5-2016">Samsung A5 2016</a></li>    
+<li><a href="/collections/galaxy-a5">Samsung Galaxy A5</a></li>    
+<li><a href="/collections/samsung-galaxy-a3-2017">Samsung Galaxy A3 2017</a></li>    
+<li><a href="/collections/galaxy-a3">Samsung Galaxy A3</a></li>    
+<li><a href="/collections/galaxy-on-8">Samsung Galaxy On 8</a></li>    
+<li><a href="/collections/samsung-galaxy-on7-2016">Samsung Galaxy On 7 2016</a></li>    
+<li><a href="/collections/galaxy-on-7">Samsung Galaxy On 7</a></li>    
+<li><a href="/collections/galaxy-on-5-2016">Samsung Galaxy On 5 2016</a></li>    
+<li><a href="/collections/galaxy-on-5">Samsung Galaxy On 5</a></li>    
+<li><a href="/collections/galaxy-note-6">Samsung Galaxy Note 5</a></li>    
+<li><a href="/collections/galaxy-note-5">Samsung Galaxy Note 4</a></li>    
+<li><a href="/collections/galaxy-note-4">Samsung Galaxy Note 3</a></li>    
+<li><a href="/collections/galaxy-note-3">Samsung Galaxy Note 2</a></li>    
+<li><a href="/collections/galaxy-e5">Samsung Galaxy E5</a></li>    
+<li><a href="/collections/galaxy-e7">Samsung Galaxy E7</a></li>    
+
+								
+                </ul>
+                <h5 class="company_head">SONY</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/sony-xperia-z5-z5-dual">Sony Xperia Z5 and Z5 dual</a></li>
+                  <li><a href="/collections/sony-experia-t2-ultra">Sony Experia T2 ultra</a></li>
+                  <li><a href="/collections/sony-experia-m2-s50h">Sony Experia M2 S50H</a></li>
+               
+ </ul>
+              </div>
+              <div class="col-md-2">
+               
+			    <ul class="model_list">
+               
+			   <li><a href="/collections/xperia-c4">Sony Xperia C4</a></li>
+                  <li><a href="/collections/xperia-c5">Sony Xperia C5</a></li>
+                  <li><a href="/collections/xperia-m4-aqua">Sony Xperia M4 Aqua</a></li>
+                  <li><a href="/collections/xperia-m5">Sony Xperia M5</a></li>
+                  <li><a href="/collections/xperia-sp-m35h">Sony Xperia SP M35H</a></li>
+                  <li><a href="/collections/sony-xperia-z2">Sony Xperia Z2</a></li>
+                
+				</ul>
+				<h5 class="company_head">VIVO</h5>
+                <ul class="model_list">
+                 
+				 <li><a href="/collections/vivo-v5-plus">Vivo V5 Plus</a></li>    
+	 <li><a href="/collections/vivo-v5">Vivo V5</a></li>    
+	 <li><a href="/collections/vivo-y67">Vivo Y67</a></li>    
+	 <li><a href="/collections/vivo-y66">Vivo Y66</a></li>    
+	 <li><a href="/collections/vivo-y55l">Vivo Y55L</a></li>    
+	 <li><a href="/collections/vivo-y53">Vivo Y53</a></li>    
+	 <li><a href="/collections/vivo-y51l">Vivo Y51L</a></li>    
+	 <li><a href="/collections/vivo-y21l">Vivo Y21L</a></li>    
+	 <li><a href="/collections/vivo-x5">Vivo X5</a></li>    
+	 <li><a href="/collections/vivo-v3-max">Vivo V3 Max</a></li>    
+	 <li><a href="/collections/vivo-v3">Vivo V3</a></li>    
+	 <li><a href="/collections/vivo-y15">Vivo Y15</a></li>    
+	 <li><a href="/collections/vivo-x5">Vivo X5</a></li>    
+
+				 
+                </ul>
+                <h5 class="company_head">CATEGORY</h5>
+                <ul class="model_list">
+                  <li><a href="/collections/iphone-7-plus/automobiles">Automobiles</a></li>          
+                  <li><a href="/collections/iphone-7-plus/comics-cartoons">Comics & Cartoons</a></li>
+                  <li><a href="/collections/iphone-7-plus/famous-personalities">Famous personalities</a></li>
+                  <li><a href="/collections/iphone-7-plus/festivals-occasions">Festivals & Occasions</a></li>
+                  <li><a href="/collections/iphone-7-plus/friendship-funny">Friendship & Funny</a></li>
+                  <li><a href="/collections/iphone-7-plus/girly">Girly</a></li>
+                  <li><a href="/collections/iphone-7-plus/graffiti-illustrations">Graffiti & Illustrations</a></li>
+                  <li><a href="/collections/iphone-7-plus/gym-addiction">Gym Addiction</a></li>
+                  <li><a href="/collections/iphone-7-plus/letters-alphabets">Letters & Alphabets</a></li>
+                  <li><a href="/collections/iphone-7-plus/motivation-and-startups">Motivation and Startups</a></li>
+                  <li><a href="/collections/iphone-7-plus/moustache">Moustache</a></li>
+                  <li><a href="/collections/iphone-7-plus/movies-and-tv-series">Movies and TV series</a></li>           
+                  <li><a href="/collections/iphone-7-plus/nature">Nature</a></li>
+                  <li><a href="/collections/iphone-7-plus/quotes">Quotes</a></li>
+                  <li><a href="/collections/iphone-7-plus/signs-symbols">Signs & Symbols</a></li>
+                  <li><a href="/collections/iphone-7-plus/skulls">Skulls</a></li>
+                  <li><a href="/collections/iphone-7-plus/spiritual">Spiritual</a></li>
+                  <li><a href="/collections/iphone-7-plus/sports">Sports</a></li>           
+                  <li><a href="/collections/iphone-7-plus/stripes">Stripes</a></li>
+                  <li><a href="/collections/iphone-7-plus/superheroes">Superheroes</a></li>
+                  <li><a href="/collections/iphone-7-plus/typography">Typography</a></li>
+                </ul>
+                <ul style="list-style-type: none;">
+                  <li><h5><a href="/collections/cushion-covers">CUSHION COVERS</a></h5></li>
+                  <li><h5><a href="/collections/coasters">COASTERS</a></h5></li>
+                  <li><h5><a href="collections/mugs">COFFEE MUGS</a></h5></li>
+                  <li><h5><a href="/collections/mouse-pads-1">MOUSE PADS</a></h5></li>
+                  <li><h5><a href="/collections/frames-1">WALL FRAMES</a></h5></li>
+                  <li><h5><a href="/collections/tshirts">T-SHIRTS</a></h5></li>
+                </ul>
+             </div>
+        </div>
+      </div>
+      <div class="row" style="color:#777;font-size:14px;">
+        <p style="margin-left:40px;margin-right:40px;margin-bottom:10px;text-align:justify">Motivatebox is a one stop shop lifestyle solution brand which deals in all kinds of quirky,
+          motivational and funny stuffs in its products like <a href="https://motivatebox.com/pages/model-list">mobile cases</a>,<a href="https://motivatebox.com/collections/frames-1"> frames</a>,<a href="https://motivatebox.com/collections/mugs"> mugs</a>,<a href="https://motivatebox.com/collections/tshirts"> t-shirts</a>,  
+          <a href="https://motivatebox.com/collections/cushion-covers"> cushion covers</a> and many more!</p>
+      </div>
+    </div>
+  </div>
+  <!-- End  Footer Content -->
+
+  <!-- Begin  Footer Copyright -->
+  <div class="footer-copyright">
+    <div class="container">
+
+      <p>&copy; {{ 'now' | date: '%Y' }} <a href="/">{{ shop.name | escape }}</a></p>
+
+      {% comment %}
+      {% if settings.show_payment %}
+      {% include 'payment-method' %}
+      {% endif %}
+      {% endcomment %}
+
+    </div>
+  </div>
+  <!-- End Footer Copyright -->
+
+  <div id="checkLayout">
+    <span class="visible-xs-block"></span>
+    <span class="visible-sm-block"></span>
+    <span class="visible-md-block"></span>
+    <span class="visible-lg-block"></span>
+  </div>
+
+</footer>
+<script>
+   var toggle_src="";
+    $(document).ready(function(){
+      $("#footer_nav_div").slideUp();
+      $("#show_links").click(function(){
+          $("#footer_nav_div").slideToggle(700);
+          toggle_src=$('#toggle_icon').attr('src');
+          if(toggle_src=="{{'arrow_up.png'|asset_url}}")
+          {
+             $('#toggle_icon').attr('src',"{{'arrow_down.png'|asset_url}}")
+          }
+          else
+          {
+             $('#toggle_icon').attr('src',"{{'arrow_up.png'|asset_url}}")
+          }
+});
+    });
+</script>

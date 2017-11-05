@@ -1,0 +1,48 @@
+<style>
+  .way{
+    background:	#D3D3D3;}
+
+   
+</style>
+{% if customer %}
+
+
+
+<div class="dropdown-account">
+<a href="/account" id="customer_account_link" title="My Account"class="dropbtn-account">
+  <span class="icon icon-login" style="margin-right: 18px;">
+  	<img src="https://cdn.shopify.com/s/files/1/1753/3519/files/arr.jpg?7963170394744462992" alt="" style="margin-left:17px;margin-top: 3px;">
+  
+  </span>    
+   
+</a>
+
+  
+  <div class="dropdown-content-account way">
+    
+    <p>Hi {{'customer.first_name}}!</p>
+    
+    <a href="/account">My Orders</a> 
+    <a href="/account/addresses">My Addresses</a>
+   
+    <a href="/account/logout">Logout</a>
+    
+  </div>
+  
+</div>
+
+{% else %}
+
+<a href="/account/login" id="customer_login_link" title="Login">
+  <span class="icon icon-login"></span>
+  <span>{{ 'general.header.login' | t }}</span>
+</a>
+
+{% endif %}
+
+{% if shop.customer_accounts_optional and settings.wishlist_page %} 
+<a href="{{pages[settings.select_wishlist_page].url}}" title="Wishlist">
+  <span class="icon icon-wl"></span>
+  <span>{{ 'general.header.wish_list' | t }}</span>
+</a>
+{% endif %}

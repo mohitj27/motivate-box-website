@@ -1,0 +1,22 @@
+{% capture store_url %}https://shopiapps.in/whatsapp-share/whatsapp_inc.php?shop={{shop.permanent_domain}}{% endcapture %}
+{{ store_url | script_tag }}
+{% assign store_meta = shop.metafields.wp_metafield.enable_wp_sticky | split: "&&"%}
+{%assign enable_sticky = store_meta[0] | split: "="%}
+{%assign bgcolor = store_meta[3] | split: "="%}
+{%assign text_color = store_meta[4] | split: "="%}
+{% if enable_sticky[1] == "yes" %}
+<div id="wp_share"></div>
+<script>
+  var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+  if(width < 440){
+    document.getElementById("wp_share").style.display = 'block';
+  }  
+</script>
+<style>
+  #wp_share {display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999999;background-color:{{bgcolor[1]}};color:{{text_color[1]}};text-align:center;font-size:16px;font-weight:bold;font-family:Arial;}
+  #wp_share_content {padding:5px 10px;}
+  #wp_share img {margin-left:10px;height:26px;vertical-align:middle;border:0;}
+  #wp_share a {color:#ffffff;text-decoration:none;}
+</style>
+{% endif %}

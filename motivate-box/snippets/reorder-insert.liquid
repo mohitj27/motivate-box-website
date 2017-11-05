@@ -1,0 +1,61 @@
+<!--REORDER_START-->
+<!--[if lte IE 6]>
+<style>.reorder-wrap{display: none !important;}</style>
+<![endif]-->
+<!--[if lte IE 7]>
+<style>.reorder-wrap{display: none !important;}</style>
+<![endif]-->
+<!--[if lte IE 8]>
+<style>.reorder-wrap{display: none !important;}</style>
+<![endif]-->
+<div style="clear:both;"></div>
+<div id="reorder_detailsactive" style="display:inherit;">
+   <div class="reorder-wrap" style="display:none;">
+      <div class="checkout-wrap"> 
+         <button id="reorder-checkout" class="btn button reorder-button" onclick="reorderFunctionCheckoutOrder('{% for line_item in order.line_items %}{% if line_item.variant_id %}{{ line_item.variant_id }}:{{ line_item.quantity }}{% else %}unavailable{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}');" >{% include 'reorder-icon' %}Re-Order & Checkout</button>
+      </div>
+      <div id="checkout-info" class="checkout-info" style="display:block;">
+         {% include 'reorder-icon-info' %}
+         <div id="reorder-popup" class="reorder-popup" >To modify item quantities when you reorder - simply press <strong>'Return to Cart'</strong> after you click Re-Order.</div>
+      </div>
+   </div>
+</div>
+<div style="clear:both;"></div>
+<script>
+   var reorderUnavailable;
+   (function(){
+      reorderUnavailable = function reorderCheckUnavailable(){
+         var data_check = "{% for line_item in order.line_items %}{% if line_item.variant_id %}{{ line_item.variant_id }}:{{ line_item.quantity }}{% else %}unavailable{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}";
+         data_check = data_check.split(",");
+         for(var i=0; i < data_check.length; i++){
+            if(data_check[i] == "unavailable"){
+               var get_button = document.getElementById("reorder-checkout");
+               get_button.setAttribute("disabled", "disabled");
+               get_button.innerHTML = "Re-Order Unavailable";
+               var icon_box = document.getElementById("checkout-info");
+               icon_box.setAttribute("style", "display:block;");
+               var icon_msg = document.getElementById("reorder-popup");
+               icon_msg.innerHTML = "Sorry! Items in this Order are no longer available - so Re-Order has been disabled."
+            }
+         }
+      }
+   })();
+   reorderUnavailable();
+   $(document).ready(function(){
+      //make the button <a> the same size as the wrapper
+      setTimeout(function(){
+            $('.reorder-icon-info').each(function(){
+               var button_height = $('.checkout-wrap').height(); // || 44
+               var icon_height = $('.reorder-icon-info').height(); // || 30
+               var margin_add = "0px";
+               if(button_height > icon_height){
+                  margin_add = ((button_height - icon_height) / 2) + "px 0";
+               }else{
+                  $(this).css('height', (button_height + "px"));
+               }
+               $(this).css('margin', margin_add);
+            });
+        }, 500);
+   });
+</script>
+<!--REORDER_END-->

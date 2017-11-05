@@ -1,0 +1,158 @@
+{% assign submenu = l.title | handleize %}
+{% if linklists[submenu].links.size > 0 %}
+
+{% if settings.use_super_megamenu == false %}
+<li class="dropdown{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+    {% include 'nav-sub-link' %}
+    {% endfor %}
+
+
+  </ul>
+</li>
+{% else %}
+
+{% if settings.mega_linklist_1 == '' and settings.mega_linklist_2 == '' %}
+<li class="dropdown{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" >
+    <span>{{ l.title }}</span>
+    {% comment %}
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+	{% endcomment %}
+  </a>
+
+  <ul class="dropdown-menu">
+    {% comment %}
+    {% for l in linklists[submenu].links %}
+    {% include 'nav-sub-link' %}
+    {% endfor %}
+
+	This won't show up when you do View Source in browser.
+	{% endcomment %}
+	<div class="row" style="padding:3px;border:none;"><br/>
+      <div class="row">
+        <div class="hidden-xs col-sm-6" >
+        <b>SHOP BY BRAND</b>
+        </div>
+        <div class="hidden-xs col-sm-6" >
+        <b>POPULAR DEVICES</b>
+        </div>
+      </div>      
+
+<div class="hidden-xs col-sm-2" style="line-height:24px;">
+    <a href="https://motivatebox.com/pages/model-list?phone_model=apple" class="apple mobile cases" style="color:black;">Apple</a><br/>
+  <a href="https://motivatebox.com/pages/model-list?phone_model=asus" class="asus mobile cases" style="color:black;">Asus</a><br/>
+      
+  <a href="https://motivatebox.com/pages/model-list?phone_model=coolpad" class="coolpad mobile cases" style="color:black;">Coolpad</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=gionee" class="gionee mobile cases" style="color:black;">Gionee</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=google" class="google mobile cases" style="color:black;">Google</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=htc" class="htc mobile cases" style="color:black;">HTC</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=honor" class="honor mobile cases" style="color:black;">Honor</a><br/>
+</div>
+<div class="hidden-xs col-sm-2" style="line-height:24px;">
+    <a href="https://motivatebox.com/pages/model-list?phone_model=leeco" class="leeco mobile cases" style="color:black;">Leeco</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=lenovo" class="lenovo mobile cases" style="color:black;">Lenovo</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=lg" class="lg mobile cases" style="color:black;">LG</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=meizu" class="meizu mobile cases" style="color:black;">Meizu</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=micromax" class="micromax mobile cases" style="color:black;">Micromax</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=motorola" class="motorola mobile cases" style="color:black;">Motorola</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=nokia" class="nokia mobile cases" style="color:black;">Nokia</a><br/>
+</div>
+<div class="hidden-xs col-sm-2" style="line-height:24px;">
+    <a href="https://motivatebox.com/pages/model-list?phone_model=oneplus" class="oneplus mobile cases" style="color:black;">Oneplus</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=oppo" class="oppo mobile cases" style="color:black;">Oppo</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=samsung" class="samsung mobile cases" style="color:black;">Samsung</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=sony" class="sony mobile cases" style="color:black;">Sony</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=vivo" class="vivo mobile cases" style="color:black;">Vivo</a><br/>
+    <a href="https://motivatebox.com/pages/model-list?phone_model=xiaomi" class="xiaomi mobile cases" style="color:black;">Xiaomi</a><br/>
+</div>
+
+      <div class="hidden-xs col-sm-3" style="line-height:22px;border-left-style:solid;border-left-width:1px;border-left-color:gray;">
+		<a href="https://motivatebox.com/collections/iphone-7" class="iphone 7 mobile cases" style="color:black;">iPhone 7</a><br/>
+		<a href="https://motivatebox.com/collections/google-pixel" class="google pixel mobile cases" style="color:black;">Google Pixel</a><br/>
+		<a href="https://motivatebox.com/collections/samsung-s6" class="samsung s6 mobile cases" style="color:black;">Samsung S6</a><br/>
+		<a href="https://motivatebox.com/collections/oneplus-3" class="oneplus 3 mobile cases" style="color:black;">OnePlus 3</a><br/>
+		<a href="https://motivatebox.com/collections/xiaomi-redmi-note-4" class="redmi note 4 mobile cases" style="color:black;">Redmi Note 4</a><br/>
+		<a href="https://motivatebox.com/collections/iphone-6-with-apple-cut-1" class="iphone 6 mobile cases" style="color:black;">iPhone 6</a><br/>
+		<a href="https://motivatebox.com/collections/moto-g4" class="moto g4 plus mobile cases" style="color:black;">Moto G4 Plus</a><br/><br/>
+        <a href="https://motivatebox.com/pages/model-list" >Show all 170+ devices</a> 
+
+      </div>
+      <div class="hidden-xs col-sm-3">
+      <img src="{{'https://cdn.shopify.com/s/files/1/1753/3519/files/armmy.jpg?2799022429450338291' }}" style="position:relative;left:-35px !important;max-width:210px !important;-webkit-transform: rotate(0deg);">
+      </div>
+      
+    </div>
+    <br/>
+
+  </ul>
+</li>
+{% else %}
+
+{% if settings.mega_linklist_1 == l.handle %}
+<li class="dropdown mega-menu{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+  {% include 'super-mega-menu-1' %}
+</li>
+{% elsif settings.mega_linklist_2 == l.handle  %}
+<li class="dropdown mega-menu{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+  {% include 'super-mega-menu-2' %}
+</li>
+{% else %}
+<li class="dropdown{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+    {% include 'nav-sub-link' %}
+    {% endfor %}
+    
+
+  </ul>
+</li>
+{% endif %}
+
+{% endif %}
+
+{% endif %}
+
+{% else %}
+<li class="{% if l.active %}active{% endif %}">
+  <a href="{{ l.url }}">
+    <span>{{ l.title }}</span>
+  </a>
+</li>
+
+{% endif %}
+

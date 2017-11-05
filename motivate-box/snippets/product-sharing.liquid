@@ -1,0 +1,47 @@
+{% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+
+<div class="social-sharing" data-permalink="{{ permalinkURL }}">
+
+  <p style="position: relative;
+    padding-left: 27px;">{{ settings.caption_social_sharing }}</p>
+
+  <div class="social-sharing-inner" style="position: relative;
+    margin-left: 27px;
+    margin-right: 27px;">
+    {% if settings.share_facebook %}
+    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook" style="position: absolute;
+    left: 2%;">
+      <i class="fa fa-facebook-square fa-2x"></i>
+    </a>
+    {% endif %}
+
+    {% if settings.share_twitter %}
+    <a target="_blank" href="//twitter.com/share?url={{ permalinkURL }}&amp;text={{ shareTitle }}" class="share" style="    left: calc(100%/5);
+    position: absolute;">
+      <i class="fa fa-twitter fa-2x"></i>
+    </a>
+    {% endif %}
+
+    {% if settings.share_pinterest %}
+    <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle | url_param_escape }}" class="share-pinterest" style="    position: absolute;
+    right: 50%;">
+      <i class="fa fa-pinterest-square fa-2x"></i>
+    </a>
+    {% endif %}
+
+    {% if settings.share_google %}
+    <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google" style="position: absolute;
+    right: 25%;">
+      <i class="fa fa-google-plus-square fa-2x"></i>
+    </a>
+    {% endif %}
+
+    {% if settings.share_email %}
+    <a href="mailto:{{shop.email}}?body={{product.title}} ({{shop.url}}{{product.url}})" class="mailto" style="position: absolute;
+    right: 2%;">
+      <i class="fa fa-envelope-square fa-2x"></i>
+    </a>
+    {% endif %}
+  </div>
+
+</div>
